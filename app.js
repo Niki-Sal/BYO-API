@@ -9,7 +9,7 @@ const db = require('./models')
 //Routes
 
 app.get('/', (req, res)=>{
-    res.send(' Welcome to Author search: you can see authors and their books')
+    res.send(' Welcome to Authors API: you can see authors and their books')
 })
 
 app.get('/authors', async(req, res)=>{

@@ -1,5 +1,5 @@
 const db = require('./models')
-
+///////////////////////////////for reference//////////////////////
 // const bookSchema = new mongoose.Schema({
 //     title: String,
 //     language: String,
@@ -12,7 +12,8 @@ const db = require('./models')
 //     country: String,
 //     books:[bookSchema]
 // });
-
+//////////////////////////////////////////////////////////////////////
+// CREATE new author
 const createAuthor = async() =>{
     const newAuthor = await db.Author.create({
         name:'Diana Gabaldon',
@@ -22,6 +23,8 @@ const createAuthor = async() =>{
 }
 // createAuthor()
 
+
+// READ existing author & CREATE new books for it
 const addNewBook = async() =>{
     const foundAuthor = await db.Author.findOne({name:'Diana Gabaldon'})
     console.log(foundAuthor)
@@ -37,6 +40,17 @@ const addNewBook = async() =>{
 
 // addNewBook()
 
+//UPDATE a book
+const findAuthorUpdateBook = async(name, bookId)=>{
+    const foundAuthor = await db.Author.findOne({name: name})
+
+    await foundAuthor.books.id(bookId).update({title: 'The Fiery Cross'})
+    await foundAuthor.save()
+    console.log(foundAuthor)
+}
+// findAuthorUpdateBook('Diana Gabaldon', '')
+
+//DELETE a book
 const findAuthorDeleteBook = async(name, bookId)=>{
     const foundAuthor = await db.Author.findOne({name: name})
 
@@ -46,3 +60,4 @@ const findAuthorDeleteBook = async(name, bookId)=>{
 }
 
 // findAuthorDeleteBook('Stephenie Meyer','603f1c9c2f07bb0ec8822fc2')
+
